@@ -1,0 +1,27 @@
+body {
+  background-color: blue;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+h3
+{
+  color: white;
+  text-align: center;
+}
+
+div {
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  width: 150px; /* Ajusta el tamaño de los botones */
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+}
