@@ -1,18 +1,7 @@
 <?php
-  include("conexion.php");
-  if($conexion)
-  {
-    $query  = "SELECT * FROM  usuarios WHERE nombre='Juan'";
-    $consultar = mysqli_query($conexion,$query);
-    if($consultar)
-    {
-      $fila   = mysqli_fetch_row($consultar);
-      $nombre = $fila[1];
-      $saldo  = $fila[2];
-      echo  "Usuario: $nombre <br>";
-      echo  "Saldo:   $saldo ";
-    }  
-  }
+  include("consultar.php");
+  $nombre = consultarDatos(1);
+  $saldo  = consultarDatos(2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +14,8 @@
 </head>
 <body>
   <h1>Bienvenido a CITIPAYAMEX</h1>
+  <h2>     Usuario: <?php echo $nombre ?></h2>
+  <h2>Saldo actual: <?php echo $saldo  ?></h2>
   <div>
     <button onclick="pagina('retiro'   )">RETIRAR  </button>
     <button onclick="pagina('consultar')">CONSULTAR</button>

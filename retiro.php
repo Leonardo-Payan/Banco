@@ -1,59 +1,14 @@
 <?php
-    include("conexion.php");
-    if($conexion)
-    {
-      $query  = "SELECT * FROM  usuarios WHERE nombre='Juan'";
-      $consultar = mysqli_query($conexion,$query);
-      if($consultar)
-      {
-        $fila   = mysqli_fetch_row($consultar);
-        $nombre = $fila[1];
-        $saldo  = $fila[2];
-        echo  "Usuario: $nombre <br>";
-        echo  "Saldo:   $saldo ";
-      }  
-    }
-  if( $_SERVER["REQUEST_METHOD"] ==  "POST" ) //sí detectamos un POST (el de abajo)
-  {
+  include("consultar.php");
+  $nombre = consultarDatos("nombre");
+  $saldo  = consultarDatos("saldo");
+  if( $_SERVER["REQUEST_METHOD"] == "POST"  &&  $_POST["retiro"] != "" ) //sí detecta POST|RETIRO
+  {   
     $retiro  = $_POST["retiro"];
-    if( $retiro!=""  )//verifico que haya metido algo
-    {
-      
-
-      if($conexion)//abrimos y confirmamos conexión
-      {
-        $query  = "SELECT saldo FROM $nombreTabla WHERE nombre='juan'";//queremos saldo de JUAN
-        $consultar_saldo  = mysqli_query($conexion,$query);
-
-        if($consultar_saldo)//sí logramos consultar
-        {
-          $fila = mysqli_fetch_row($consultar_saldo);//gracias a fetch podemos acceder por índices 
-          $saldo = $fila[0];//saldo de juan
-
-          if($retiro  <=  $saldo)
-          {
-            $saldo  = $saldo - $retiro;
-            $query  = "UPDATE $nombreTabla  SET saldo = $saldo  WHERE nombre='juan'";
-            $actualizar_saldo  = mysqli_query($conexion,$query);
-
-            if ($actualizar_saldo) // Si la actualización fue exitosa
-            { 
-              echo "Retiro exitoso. Tu nuevo saldo es: $saldo";
-            } 
-            else 
-            {
-              echo "Error al actualizar el saldo. Intenta nuevamente.";
-            }
-          }
-          else
-          {
-            echo "<script>
-                    alert('Saldo insuficiente para realizar el retiro');
-                  </script>";
-          }
-        }
-        mysqli_close($conexion);
-      }
+    if($retiro  <=  $saldo)
+    { 
+      $saldo  -=  $retiro;
+      actualizarRegistro("saldo",$saldo);
     }
   }
 ?>
@@ -69,6 +24,8 @@
 </head>
 <body>
   <h1>BANCO CITIPAYAMEX</h1>
+    <h2>     Usuario: <?php echo $nombre ?></h2>
+    <h2>Saldo actual: <?php echo $saldo  ?></h2>
     <h3>seleccione la cantidad que desea retirar</h3>
       <div>
         <form action="<?php $_SERVER['PHP_SELF']?>" method="POST">

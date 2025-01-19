@@ -1,21 +1,39 @@
 <?php
-  mysqli_report(MYSQLI_REPORT_OFF); // Deshabilita las excepciones de MySQL
+  mysqli_report(MYSQLI_REPORT_OFF); // Excepciones deshabilitadas
 
-  $consultar  = mysqli_query($conexion,$query);
+  function  consultarDatos($columna) //nombre
+  {
+    include("conexion.php");
+    if($conexion)
+    {                            //nombre       usuarios                   Marcos
+      $query            = "SELECT $columna FROM $nombreTabla WHERE nombre='$nombre'";
 
-  if($consultar)
-  {
-    echo "<script>
-            alert('Operación exitosa!');
-            window.open('menu.php', '_self');
-         </script>";
+      if(($consultar_datos  = mysqli_query($conexion,$query)) !== false)//consultar
+      {
+        $datos = mysqli_fetch_assoc($consultar_datos);//tabla -> array asociativo
+      }
+      return $datos[$columna];
+
+    }
+    mysqli_close($conexion);
+
   }
-  else 
+
+  function  actualizarRegistro($columna,$valor)
   {
-      echo "<script>
-              alert('Parece que hubo un problema, intentalo de nuevo...');
-              history.back();
-            </script>";
+    include("conexion.php");
+    if($conexion)
+    {
+      $query             =  "UPDATE $nombreTabla  SET $columna = $valor  WHERE nombre='$nombre'";
+      if (mysqli_query($conexion,$query)) // Si la actualización fue exitosa
+      { 
+        echo "<script>alert('Retiro exitoso! Tu nuevo saldo es $valor')</script>";
+      } 
+      else 
+      {
+        echo "<script>alert('LA CONSULTA FALLÓ, revisa consultar.php')</script>";
+      }
+    }
+    mysqli_close($conexion);  
   }
-  mysqli_close($conexion);
 ?>
