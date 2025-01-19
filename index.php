@@ -1,7 +1,7 @@
 <?php
   include("consultar.php");
-  $nombre = consultarDatos(1);
-  $saldo  = consultarDatos(2);
+  $nombre = consultarDatos("nombre");
+  $saldo  = consultarDatos("saldo");
 ?>
 <!DOCTYPE html>
 <html lang="en">
