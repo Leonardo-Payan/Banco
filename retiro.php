@@ -2,14 +2,16 @@
   include("consultar.php");
   $nombre = consultarDatos("nombre");
   $saldo  = consultarDatos("saldo");
-  if( $_SERVER["REQUEST_METHOD"] == "POST"  &&  $_POST["retiro"] != "" ) //sí detecta POST|RETIRO
+  if( $_SERVER["REQUEST_METHOD"] == "POST"  &&  $_POST["retiro"] != "" ) //[TRUE]sí detecta POST
   {   
     $retiro  = $_POST["retiro"];
-    if($retiro  <=  $saldo)
+    
+    if($retiro > 0  &&  $retiro  <=  $saldo)
     { 
       $saldo  -=  $retiro;
       actualizarRegistro("saldo",$saldo);
     }
+    
   }
 ?>
 

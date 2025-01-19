@@ -6,8 +6,8 @@
     include("conexion.php");
 
     if($conexion)
-    {                            //nombre       usuarios                   Marcos
-      $query            = "SELECT $columna FROM $nombreTabla WHERE nombre='$nombre'";
+    {                   //nombre       usuarios                   Marcos
+      $query  = "SELECT $columna FROM $nombreTabla WHERE nombre='$nombre'";
 
       if(($consultar_datos  = mysqli_query($conexion,$query)) !== false)//consultar
       {
@@ -25,16 +25,20 @@
     include("conexion.php");
 
     if($conexion)
-    {                              //usuarios  |      saldo    = $saldo-=retiro
-      $query             =  "UPDATE $nombreTabla  SET $columna = $nuevoDato  WHERE nombre='$nombre'";
+    {                    //usuarios  |      saldo    = $saldo±=retiro/deposito
+      $query  =  "UPDATE $nombreTabla  SET $columna = $nuevoDato  WHERE nombre='$nombre'";
 
       if (mysqli_query($conexion,$query))
       { 
-        echo "<script>alert('Operación exitosa! Nuevo dato: $nuevoDato')</script>";
+        echo "<script>
+                alert('Operación exitosa! Nuevo dato: $nuevoDato')
+              </script>";
       } 
       else 
       {
-        echo "<script>alert('LA CONSULTA FALLÓ, revisa consultar.php')</script>";
+        echo "<script>
+                alert('LA CONSULTA FALLÓ, revisa consultar.php')
+              </script>";
       }
 
     }
