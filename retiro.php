@@ -2,7 +2,7 @@
   include("consultar.php");
   $nombre = consultarDatos("nombre");
   $saldo  = consultarDatos("saldo");
-  if( $_SERVER["REQUEST_METHOD"] == "POST"  &&  $_POST["retiro"] != "" ) //[TRUE]sí detecta POST
+  if( $_SERVER["REQUEST_METHOD"] == "POST"  &&  !empty($_POST["retiro"])) //[TRUE]sí detecta POST
   {   
     $retiro  = $_POST["retiro"];
     
@@ -26,7 +26,7 @@
 </head>
 <body>
   <h1>BANCO CITIPAYAMEX</h1>
-    <h2>     Usuario: <?php echo $nombre ?></h2>
+    <h2>     Nombre: <?php echo $nombre ?></h2>
     <h2>Saldo actual: <?php echo $saldo  ?></h2>
     <h3>seleccione la cantidad que desea retirar</h3>
       <div>
@@ -41,7 +41,7 @@
       </div>
       <br><br>
       <div>
-        <button onclick="pagina('index'   )">VOLVER  </button>
+        <button onclick="pagina('menu'   )">VOLVER  </button>
       </div>
 </body>
 </html>

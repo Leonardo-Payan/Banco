@@ -9,9 +9,9 @@
     {                   //nombre       usuarios                   Marcos
       $query  = "SELECT $columna FROM $nombreTabla WHERE nombre='$nombre'";
 
-      if(($consultar_datos  = mysqli_query($conexion,$query)) !== false)//consultar
+      if(($resultadoConsulta  = mysqli_query($conexion,$query)) !== false)//consultar
       {
-        $datos = mysqli_fetch_assoc($consultar_datos);//tabla -> array asociativo
+        $datos = mysqli_fetch_assoc($resultadoConsulta);//tabla -> array asociativo
         return $datos[$columna]; 
       }
 
@@ -31,18 +31,47 @@
       if (mysqli_query($conexion,$query))
       { 
         echo "<script>
-                alert('Operación exitosa! Nuevo dato: $nuevoDato')
+                alert('Operación exitosa! Nuevo dato: $nuevoDato');
               </script>";
       } 
       else 
       {
         echo "<script>
-                alert('LA CONSULTA FALLÓ, revisa consultar.php')
+                alert('LA CONSULTA FALLÓ, revisa consultar.php');
               </script>";
       }
 
     }
     mysqli_close($conexion);  
 
+  }
+
+  function  iniciarSesion($usuario,$contraseña)
+  {
+    include("conexion.php");
+
+    if($conexion)
+    {
+      $query  = "SELECT * FROM $nombreTabla WHERE usuario='$usuario'";
+      if($resultadoConsulta = mysqli_query($conexion,$query))
+      {
+        $row = mysqli_fetch_assoc($resultadoConsulta);
+
+        if ($row && password_verify($contraseña, $row["contraseña"])) 
+        {
+          echo "<script>
+                  alert('Bienvenido {$row['nombre']}');
+                  window.open('menu.php', '_self');
+                </script>";
+        } 
+        else
+        {
+          echo "<script>
+                  alert('Usuario o contraseña incorrecto');
+                </script>"; 
+        }
+      }
+    }
+    mysqli_close($conexion);    
   }
 ?>

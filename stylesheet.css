@@ -2,12 +2,15 @@ body
 {
   background-color: rgb(30, 0, 222);
   font-family: system-ui, sans-serif;
-  font-size: 22px;
+  color: white;
 }
 h1 
 {
+  font-size: 58px;
   color: white;
   text-align: center;
+  margin-top: 0;
+  margin-bottom: 5px;
 }
 h2
 {
@@ -18,15 +21,30 @@ h3
 {
   color: white;
   text-align: center;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
-
+p
+{
+  font-size: 12px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+input
+{
+  padding: 5px;
+  font-size: 22px;
+}
 div {
   display: grid;
   justify-content: center;
-  gap: 10px;
+  font-size: 24px;
 }
 
 button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: grid;
   align-items: center;
   appearance: none;
   background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
@@ -36,15 +54,12 @@ button {
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  display: inline-flex;
-  font-family: "JetBrains Mono",monospace;
-  height: 48px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif,monospace;
+  height: 32px;
   justify-content: center;
   line-height: 1;
   list-style: none;
   overflow: hidden;
-  padding-left: 16px;
-  padding-right: 16px;
   position: relative;
   text-align: left;
   text-decoration: none;
@@ -88,12 +103,6 @@ button:active {
     --text: oklch(85% .1 var(--hue));
     --shadow: oklch(25% .2 var(--hue));
     --highlight: oklch(98% .05 var(--hue));
-  }
-
-
-  h1 {
-    font-size: 5vi;
-    letter-spacing: -.15ch;
   }
   
   small {

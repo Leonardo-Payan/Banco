@@ -5,12 +5,9 @@
   $db   = "citipayamex"; //database
   $port = "3306";
 
-  $nombreTabla  = "usuarios";
-  $nombre       = "Marcos";
+  $nombreTabla  = "registros";
+  $campos       = "nombre,apellido_paterno,apellido_materno,usuario,contraseña,email,telefono";
   
   $conexion = mysqli_connect($host,$user,$pwd,$db,$port);//conectamos con SQL
-  if(!$conexion) 
-  {
-    die("CONEXION FALLÓ, verifica conexion.php" . mysqli_connect_error());
-  }
+
 ?>

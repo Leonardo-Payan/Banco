@@ -1,28 +1,39 @@
 <?php
   include("consultar.php");
-  $nombre = consultarDatos("nombre");
-  $saldo  = consultarDatos("saldo");
+  if($_SERVER["REQUEST_METHOD"] == "POST")
+  {
+    $usuario  = $_POST["usuario"];
+    $contraseña = $_POST["contraseña"];
+
+    iniciarSesion($usuario,$contraseña);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BANCO CITIPAYAMEX</title>
+  <title>Inicio</title>
   <script src="funciones.js"></script>
   <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-  <h1>Bienvenido a CITIPAYAMEX</h1>
-  <h2>     Usuario: <?php echo $nombre ?></h2>
-  <h2>Saldo actual: <?php echo $saldo  ?></h2>
+
+  <form action="<?php $_SERVER['PHP_SELF']?>" method="POST">        
+    <div>
+    <h1>Inicia sesión</h1>
+        Usuario:    <input type="text" name="usuario"        required>
+        Contraseña: <input type="password" name="contraseña" required>
+                    <button type="submit">Ingresar</button>
+    </div>
+  </form>
+
   <div>
-    <button onclick="pagina('retiro'   )">RETIRAR  </button>
-    <button onclick="pagina('consultar')">CONSULTAR</button>
-    <button onclick="pagina('depositar')">DEPOSITAR</button>
-    <button onclick="pagina('pagarServicios')">PAGAR SERVICIOS</button> 
-    <button onclick="pagina('transferencias')">TRANSFERENCIA  </button>
-    <button onclick="pagina('recarga'       )">RECARGA        </button>
+  <h3>¿No estás registrado?</h3><br>
   </div>
+  <div>
+    <button onclick="pagina('registro')">Registrarse</button>
+  </div>
+
 </body>
 </html>
