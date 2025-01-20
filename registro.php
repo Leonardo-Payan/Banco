@@ -52,7 +52,9 @@
         Constraseña:      <input type="password" name="contraseña"   required>
         Email:            <input type="email"    name="email"        required>
         Teléfono:         <input type="number"   name="telefono">
+      <div>
                           <button type="submit">Ingresar</button>
+      </div>
     </div>
 </form>
 <div>

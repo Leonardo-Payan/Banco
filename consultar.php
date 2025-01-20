@@ -1,16 +1,19 @@
 <?php
-  mysqli_report(MYSQLI_REPORT_OFF); // Excepciones deshabilitadas
+  //mysqli_report(MYSQLI_REPORT_OFF); // Excepciones deshabilitadas
                           //nombre
   function  consultarDatos($columna) 
   {
     include("conexion.php");
 
     if($conexion)
-    {                   //nombre       usuarios                   Marcos
+    {        
+      echo "consultarDatos dice: conexión exitosa!<br>";
+                       //nombre       registros                   Marcos
       $query  = "SELECT $columna FROM $nombreTabla WHERE nombre='$nombre'";
 
       if(($resultadoConsulta  = mysqli_query($conexion,$query)) !== false)//consultar
       {
+        echo  "consultarDatos dice: consulta exitosa!<br>";
         $datos = mysqli_fetch_assoc($resultadoConsulta);//tabla -> array asociativo
         return $datos[$columna]; 
       }
@@ -25,14 +28,15 @@
     include("conexion.php");
 
     if($conexion)
-    {                    //usuarios  |      saldo    = $saldo±=retiro/deposito
-      $query  =  "UPDATE $nombreTabla  SET $columna = $nuevoDato  WHERE nombre='$nombre'";
-
+    {                    //registros  |      saldo  = $saldo±=retiro/deposito
+      $query  =  "UPDATE $nombreTabla SET $columna = $nuevoDato  WHERE nombre='$nombre'";
+      echo "actualizarRegistro dice: CONEXIÓN EXITOSA!<br>";
       if (mysqli_query($conexion,$query))
       { 
         echo "<script>
                 alert('Operación exitosa! Nuevo dato: $nuevoDato');
               </script>";
+        echo "actualizarRegistro dice: FUNCIÓN EXITOSA!<br>";
       } 
       else 
       {
@@ -41,6 +45,12 @@
               </script>";
       }
 
+    }
+    else
+    {
+         echo "<script>
+                alert('LA CONEXION FALLÓ, revisa consultar.php');
+              </script>";     
     }
     mysqli_close($conexion);  
 

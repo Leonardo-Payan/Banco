@@ -24,7 +24,10 @@
     <h1>Inicia sesión</h1>
         Usuario:    <input type="text" name="usuario"        required>
         Contraseña: <input type="password" name="contraseña" required>
-                    <button type="submit">Ingresar</button>
+
+      <div>
+        <button type="submit">Ingresar</button>
+      </div>
     </div>
   </form>
 

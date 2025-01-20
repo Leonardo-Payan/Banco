@@ -1,17 +1,19 @@
 <?php
   include("consultar.php");
-  $nombre = consultarDatos("nombre");
+  $usuario = consultarDatos("nombre");
   $saldo  = consultarDatos("saldo");
-  if( $_SERVER["REQUEST_METHOD"] == "POST"  &&  $_POST["deposito"] != "" ) //[TRUE]sí detecta POST
+  if( $_SERVER["REQUEST_METHOD"] == "POST"  &&  !empty($_POST["deposito"])) //[TRUE]sí detecta POST
   {   
+    echo "post dice: bloque activado!<br>";
     $deposito  = $_POST["deposito"];
-    
-    if($deposito > 0  &&  $deposito  <=  $saldo)
+    echo "post dice: deposito = $deposito<br>";
+    if($deposito > 0)
     { 
+      echo "post dice: deposito mayor a 0!<br>";
       $saldo  +=  $deposito;
       actualizarRegistro("saldo",$saldo);
-    }
-    
+      echo "post dice: función ejecutada!<br>";
+    }  
   }
 ?>
 
@@ -26,7 +28,7 @@
 </head>
 <body>
   <h1>BANCO CITIPAYAMEX</h1>
-    <h2>     Usuario: <?php echo $nombre ?></h2>
+    <h2>     Usuario: <?php echo $usuario ?></h2>
     <h2>Saldo actual: <?php echo $saldo  ?></h2>
     <h3>Seleccione la cantidad que desea depositar</h3>
       <div>
@@ -41,7 +43,7 @@
       </div>
       <br><br>
       <div>
-          <button onclick="pagina('index')">VOLVER</button>
+          <button onclick="pagina('menu')">VOLVER</button>
       </div>
 </body>
 </html>
